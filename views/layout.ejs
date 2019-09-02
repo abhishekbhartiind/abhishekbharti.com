@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title><%= title %></title>
+		<meta name="description" content="<%= description %>" />
+		<meta name="keywords"  content="<%= keywords %> " />
+        <%- partial('partials/head') %>
+    </head>
+
+    <body id="top" data-spy="scroll" >
+	  <%- partial('partials/header') %>
+		<%- body %>
+		<%- partial('partials/sidebar') %>
+		<%- partial('partials/footer') %>
+		<%- partial('partials/scripts') %>
+    </body>
+</html>
