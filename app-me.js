@@ -36,6 +36,7 @@ app.get('/activities', routes.activities);
 app.get('/error', function(req, res, next){
  	next(new Error('A contrived error'));
 });
-app.listen(3003, () => {
-  console.log("App server running on port 3003");
+
+app.listen(3000, () => {
+  console.log("App server running on port 3000");
 });
