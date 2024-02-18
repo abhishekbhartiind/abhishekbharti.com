@@ -1,42 +1,41 @@
-let express = require('express'),
-	partials = require('express-partials'),
-	app = express(),
-	routes = require('./routes'),
-  minifyHTML = require('express-minify-html'),
-  compression = require('compression')
-;
-	
-app.set('view engine', 'ejs');
-app.set('view options', {defaultLayout: 'layout'});
+let express = require("express"),
+  partials = require("express-partials"),
+  app = express(),
+  routes = require("./routes"),
+  minifyHTML = require("express-minify-html"),
+  compression = require("compression")
+app.set("view engine", "ejs")
+app.set("view options", { defaultLayout: "layout" })
 
-app.use(partials());
-app.use(express.static(__dirname + '/static'));
+app.use(partials())
+app.use(express.static(__dirname + "/static"))
 
-app.use(minifyHTML({
-  override:      true,
-  exception_url: false,
-  htmlMinifier: {
-      removeComments:            true,
-      collapseWhitespace:        true,
+app.use(
+  minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+      removeComments: true,
+      collapseWhitespace: true,
       collapseBooleanAttributes: true,
-      removeAttributeQuotes:     true,
-      removeEmptyAttributes:     true,
-      minifyJS:                  true
-  }
-}));
-app.use(compression());
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+      minifyJS: true,
+    },
+  })
+)
+app.use(compression())
 
 //routes
-app.get('/', routes.index);
+app.get("/", routes.index)
 //app.get('/about-us',routes.about);
-app.get('/contact', routes.contact);
-app.get('/activities', routes.activities);
+app.get("/contact", routes.contact)
+app.get("/activities", routes.activities)
 
+app.get("/error", function (req, res, next) {
+  next(new Error("A contrived error"))
+})
 
-app.get('/error', function(req, res, next){
- 	next(new Error('A contrived error'));
-});
-
-app.listen(3000, () => {
-  console.log("App server running on port 3000");
-});
+app.listen(3001, () => {
+  console.log("App server running on port 3000")
+})
